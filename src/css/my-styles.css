@@ -82,3 +82,38 @@
 .hidden {
   display: none !important;
 }
+
+.hidden {
+  display: none;
+}
+
+/* Базовий контейнер */
+.loader-form,
+.loader-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Крутилка */
+.loader-form::after,
+.loader-more::after {
+  content: "";
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  border: 3px solid #ccc;
+  border-top: 3px solid #007BFF;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Анімація */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

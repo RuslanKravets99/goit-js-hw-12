@@ -1,27 +1,12 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
 const galleryContainer = document.querySelector('.gallery');
-const loaderContainer = document.querySelector('.loader-container');
+const loaderForm = document.querySelector('.loader-form');
+const loaderMore = document.querySelector('.loader-more');
 const loadMoreBtn = document.querySelector('.load-more');
-
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-});
 
 export function createGallery(images) {
   const markup = images
     .map(
-      ({
-        webformatURL,
-        largeImageURL,
-        tags,
-        likes,
-        views,
-        comments,
-        downloads,
-      }) => `
+      ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
     <li class="gallery-item">
       <a href="${largeImageURL}">
         <img src="${webformatURL}" alt="${tags}" loading="lazy" />
@@ -36,27 +21,27 @@ export function createGallery(images) {
   `
     )
     .join('');
-
   galleryContainer.insertAdjacentHTML('beforeend', markup);
-  lightbox.refresh();
 }
 
 export function clearGallery() {
   galleryContainer.innerHTML = '';
 }
 
-export function showLoader() {
-  if (loaderContainer) loaderContainer.classList.remove('hidden');
+export function showLoader(type = 'form') {
+  if (type === 'form') loaderForm.classList.remove('hidden');
+  if (type === 'more') loaderMore.classList.remove('hidden');
 }
 
-export function hideLoader() {
-  if (loaderContainer) loaderContainer.classList.add('hidden');
+export function hideLoader(type = 'form') {
+  if (type === 'form') loaderForm.classList.add('hidden');
+  if (type === 'more') loaderMore.classList.add('hidden');
 }
 
 export function showLoadMoreButton() {
-  if (loadMoreBtn) loadMoreBtn.classList.remove('hidden');
+  loadMoreBtn.classList.remove('hidden');
 }
 
 export function hideLoadMoreButton() {
-  if (loadMoreBtn) loadMoreBtn.classList.add('hidden');
+  loadMoreBtn.classList.add('hidden');
 }
